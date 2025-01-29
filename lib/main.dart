@@ -3,8 +3,15 @@ import 'package:clockapp/home_page.dart';
 import 'package:clockapp/menu_information.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+import 'alarm_view.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(AlarmAdapter());
+  await Hive.openBox<Alarm>('alarms');
   runApp(const MyApp());
 }
 
